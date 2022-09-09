@@ -17,8 +17,15 @@ const App = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (search.length === 0) {
+      fetchData();
+    }
+  }, [search]);
+
   const filterData = (e) => {
     setSearch(e.target.value);
+
     const filteredData = data.filter((item) => {
       return item.name.toLowerCase().includes(search.toLowerCase());
     });
@@ -58,7 +65,7 @@ const App = () => {
         <div className='right_top'>
           <div className='app_search'>
             <input
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => filterData(e)}
               type='text'
               placeholder='Ara'
             />
@@ -102,7 +109,6 @@ const App = () => {
           )}
         </div>
       </div>
-      {/* <div className='bottom'></div> */}
     </div>
   );
 };
